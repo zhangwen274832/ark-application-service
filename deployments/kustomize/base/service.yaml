@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ark-application-service-svc
+spec:
+  ports:
+    - port: 40200
+      protocol: TCP
+      targetPort: 40200
+  selector:
+    app: ark-application-service
+  type: NodePort

@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ark-application-service
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "false"
+        sidecar.istio.io/inject: "false"
+        prometheus.io/path: /metrics
+        prometheus.io/port: '40200'
+        prometheus.io/scheme: http
+        prometheus.io/scrape: 'true'
+    spec:
+      containers:
+        - name: ark-application-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 40200
+          env:
+            - name: VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: AMAN_ADDRS
+              valueFrom:
+                configMapKeyRef:
+                  key: aman_addr
+                  name: ark-application-service-config
+            - name: AMAN_ENV_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: aman_env_id
+                  name: ark-application-service-config
+            - name: AMAN_PROJECT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: aman_project_id
+                  name: ark-application-service-config
+          volumeMounts:
+            - name: logdata
+              mountPath: /var/log/ark-application-service/
+            - name: blogdata
+              mountPath: /Fotoable_Log/
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "sleep", "10" ]
+      terminationGracePeriodSeconds: 30
+      imagePullSecrets:
+        - name: admin-secret
+      volumes:
+        - name: logdata
+          hostPath:
+            path: /var/log/ark/ark-application-service
+            type: DirectoryOrCreate
+        - name: blogdata
+          hostPath:
+            path: /var/blog/ark/ark-application-service
+            type: DirectoryOrCreate

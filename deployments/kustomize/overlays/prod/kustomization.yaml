@@ -1,0 +1,10 @@
+commonLabels:
+  app: ark-application-service
+namePrefix: prod-
+resources:
+  - ../../base
+patchesStrategicMerge:
+  - configmap_patch.yaml
+  - deployment_patch.yaml
+  - healthcheck_patch.yaml
+  - memorylimit_patch.yaml

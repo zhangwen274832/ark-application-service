@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ark-application-service-config
+data:
+  aman_addr: "https://aman-internal.akgoo.net"
+  aman_env_id: "3"
+  aman_project_id: "ark-application-service"

@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ark-application-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: ark-application-service
+          image: "harbor.nuclearport.com/aircraft/ark-application-service-test:latest"
+          env:
+            - name: ENV_NAME
+              value: "test"

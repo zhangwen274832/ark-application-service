@@ -1,0 +1,6 @@
+namespace: ark-toc-service
+resources:
+  - configmap_patch.yaml
+  - deployment.yaml
+  - service.yaml
+  - hpa.yaml

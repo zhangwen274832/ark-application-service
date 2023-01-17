@@ -1,0 +1,11 @@
+commonLabels:
+  app: ark-application-service
+namePrefix: test-
+resources:
+  - ../../base
+patchesStrategicMerge:
+  - configmap_patch.yaml
+  - deployment_patch.yaml
+  - remove_hpa.yaml
+  - memorylimit_patch.yaml
+

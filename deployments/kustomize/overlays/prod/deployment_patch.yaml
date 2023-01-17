@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ark-application-service
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+        - name: ark-application-service
+          image: "harbor.nuclearport.com/aircraft/ark-application-service-prod:latest"
+          env:
+            - name: ENV_NAME
+              value: "prod"
