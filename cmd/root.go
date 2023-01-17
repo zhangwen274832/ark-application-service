@@ -31,8 +31,8 @@ var (
 
 func init() {
 	cobra.OnInitialize(initDependency)
-	rootCmd.PersistentFlags().StringVar(&amanAddr, "aman_addr", "https://aman.akgoo.net", "aman 的请求地址")
-	rootCmd.PersistentFlags().StringVar(&amanProjectID, "aman_project_id", "ark-application-service-service", "在 aman 配置的项目ID")
+	rootCmd.PersistentFlags().StringVar(&amanAddr, "aman_addr", "https://aman-internal.akgoo.net", "aman 的请求地址")
+	rootCmd.PersistentFlags().StringVar(&amanProjectID, "aman_project_id", "ark-application-service", "在 aman 配置的项目ID")
 	rootCmd.PersistentFlags().StringVar(&amanEnvID, "aman_env_id", "1", "在 aman 配置的环境ID")
 	rootCmd.PersistentFlags().StringVar(&version, "version", "latest.", "service version")
 
