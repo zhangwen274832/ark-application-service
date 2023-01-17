@@ -9,10 +9,10 @@ import (
 )
 
 type Config struct {
-	Logger LoggerConf    `ftV:"config.logger"` //普通日志配置
-	Redis  RedisConf     `ftV:"config.redis"`  //redis 配置
-	Cache  Cache         `ftV:"config.cache"`  //本次缓存配置
-	Mysql  gmysql.Config `ftV:"config.mysql"`  //mysql 配置
+	Logger   LoggerConf    `ftV:"config.logger"`    //普通日志配置
+	ArkRedis RedisConf     `ftV:"config.ark_redis"` //redis 配置
+	Cache    Cache         `ftV:"config.cache"`     //本次缓存配置
+	Mysql    gmysql.Config `ftV:"config.mysql"`     //mysql 配置
 }
 
 type LoggerConf struct {

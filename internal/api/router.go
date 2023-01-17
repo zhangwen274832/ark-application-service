@@ -4,7 +4,6 @@ import (
 	"context"
 	"net/http"
 
-	"gitlab.ftsview.com/aircraft/ark-application-service/internal/api/middleware"
 	"gitlab.ftsview.com/aircraft/ark-application-service/internal/config"
 	"gitlab.ftsview.com/aircraft/ark-application-service/internal/handler"
 
@@ -40,9 +39,9 @@ func generateRouter() *gin.Engine {
 
 	//设置中间件
 	router.Use(
-		middleware.Recovery(),
-		middleware.RequestID(),
-		gginutil.SignToC(false),
+		gginutil.Recovery(),
+		gginutil.RequestID(gginutil.AllPrint),
+		gginutil.SignToC(false), //默认True，True:标识全局开启加解密，False:不开启， 且不能与EncryptionV2共用
 		ginprom.PromMiddleware(
 			ginprom.WithExcludeRegexEndpoint(`^/metrics|/version|/heartbeat$`),
 		),

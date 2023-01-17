@@ -2,7 +2,10 @@ package cmd
 
 import (
 	"context"
+	"gitlab.ftsview.com/fotoable-go/gredis"
+	"gitlab.ftsview.com/fotoable-go/gsecret"
 	"os"
+	"time"
 
 	"gitlab.ftsview.com/aircraft/ark-application-service/internal"
 	"gitlab.ftsview.com/aircraft/ark-application-service/internal/cache"
@@ -89,10 +92,15 @@ func mysqlInit() {
 func redisInit() {
 	//注意：使用时需要安装 go get gitlab.ftsview.com/fotoable-go/gredis
 	//初始化Redis，使用不同的名称创建不同的Redis实例，Redis实例类型包括（哨兵、集群）
-	//gredis.MustInit(constants.RedisClusterName,
-	//	gredis.WithCluster(),
-	//	gredis.WithHosts(config.GlobConfig.Redis.Host),
-	//	gredis.WithPoolSize(config.GlobConfig.Redis.PoolSize),
-	//	gredis.WithPassWord(config.GlobConfig.Redis.Password),
-	//	gredis.WithMinIdleCons(config.GlobConfig.Redis.MinIdle))
+	gredis.MustInit(constants.ArkRedis,
+		gredis.WithClient(),
+		gredis.WithHosts(config.GlobConfig.ArkRedis.Host),
+		gredis.WithUserName(config.GlobConfig.ArkRedis.UserName),
+		gredis.WithPassWord(config.GlobConfig.ArkRedis.Password),
+		gredis.WithPoolSize(config.GlobConfig.ArkRedis.PoolSize),
+		gredis.WithMinIdleCons(config.GlobConfig.ArkRedis.MinIdle))
+
+	if err := gsecret.MustInit(gredis.Redis(constants.ArkRedis), time.Hour); err != nil {
+		panic(err)
+	}
 }

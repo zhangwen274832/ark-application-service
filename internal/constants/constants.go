@@ -27,3 +27,7 @@ const (
 	MiddleLine  = "-"
 	Comma       = ","
 )
+
+const (
+	ArkRedis = "ark_redis" //同步配置使用的Redis
+)
