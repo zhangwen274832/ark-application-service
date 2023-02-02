@@ -12,7 +12,7 @@ library 'fotoable-libs'
 
     //以下参数需要研发人员修改
     //拉取代码库的地址
-    map.put('REPO_URL',"git@gitlab.ftsview.com:aircraft/ark-application-service.git")
+    map.put('REPO_URL',"git@gitlab.ftsview.com:aircraft/toc/ark-application-service.git")
     //代码的构建分支
     map.put('BRANCH', "${BRANCH}")
 
