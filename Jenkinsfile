@@ -17,33 +17,39 @@ library 'fotoable-libs'
     map.put('BRANCH', "${BRANCH}")
 
     //以下参数为多分支构建参数
-    //测试环境
+ //以下参数为多分支构建参数
     if ("${BRANCH}" == "dev"){
         // 测试环境发版节点
         map.put('node','master')
         // 部署环境
         map.put('DEPENV','test')
-        map.put('cluster', "k8s")
+        map.put('cluster', "ACK")
     //预发布环境
+    } else if("${BRANCH}" == "dev-ack"){
+        // 测试环境发版节点
+        map.put('node','master')
+        // 部署环境
+        map.put('DEPENV','ack-test')
+        map.put('cluster', "ACK")
+    //生产环境
     } else if("${BRANCH}" == "release"){
         // 预发布环境发版节点
-        map.put('node','aws-nuclearport-jenkins')
+        map.put('node','master')
         // 部署环境
         map.put('DEPENV','ha')
-        map.put('cluster', "eks")
+        map.put('cluster', "ACK")
 
     //生产环境
     } else if ("${BRANCH}" == "master"){
         // 生产环境发版节点
-        map.put('node','aws-nuclearport-jenkins')
+        map.put('node','master')
         // 部署环境
         map.put('DEPENV','online')
-        map.put('cluster', "eks")
+        map.put('cluster', "ACK")
 
 
     }
 
 
 // 环境使用方法(dev为测试环境请使用k8s;stage为预发布使用ekst;master为生产环境请使用eks)
-Betta_EKS_v2 ("cluster",map)
-
+Betta_ACK_v2 ("cluster",map)
