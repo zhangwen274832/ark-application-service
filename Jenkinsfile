@@ -30,29 +30,30 @@ library 'fotoable-libs'
         // 部署环境
         map.put('DEPENV','ack-test')
         map.put('cluster', "ACK")
-    //生产环境AWS EKS发版 && "${deplay}" == "AWS-Ark-ToC-prod"
-    } else if("${BRANCH}" == "master"){
+    //生产环境AWS EKS发版
+    } else if("${BRANCH}" == "master" && "${deplay}" == "AWS-Ark-ToC-prod"){
         map.put('node','aws-nuclearport-jenkins')
         // 部署环境
         map.put('DEPENV','online')
         map.put('cluster', "ACK")
 
     //生产环境 阿里云美国发版
-    } else if ("${BRANCH}" == "master"){
+    } else if ("${BRANCH}" == "master" && "${deplay}" == "ali-US-prod"){
         // 生产环境发版节点
         map.put('node','master')
         // 部署环境
         map.put('DEPENV','online')
         map.put('cluster', "ACK")
     //生存环境，阿里云北京发版
-    }else if ("${BRANCH}" == "master"){
+    }else if ("${BRANCH}" == "master" && "${deplay}" == "ali-Beijing-prod"){
         // 生产环境发版节点
         map.put('node','master')
         // 部署环境
         map.put('DEPENV','online')
         map.put('cluster', "ACK")
 
-    }
+
 // 环境使用方法(dev为测试环境请使用k8s;stage为预发布使用ekst;master为生产环境请使用eks)
 Betta_ACK_v3 ("cluster",map)
+
 
