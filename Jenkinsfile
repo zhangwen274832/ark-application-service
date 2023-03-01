@@ -30,22 +30,22 @@ library 'fotoable-libs'
         // 部署环境
         map.put('DEPENV','ack-test')
         map.put('cluster', "ACK")
-    //生产环境AWS EKS发版
-    } else if("${BRANCH}" == "master" && "${deplay}" == "AWS-Ark-ToC-prod"){
+    //生产环境AWS EKS发版 && "${deplay}" == "AWS-Ark-ToC-prod"
+    } else if("${BRANCH}" == "master"){
         map.put('node','aws-nuclearport-jenkins')
         // 部署环境
         map.put('DEPENV','online')
         map.put('cluster', "ACK")
 
     //生产环境 阿里云美国发版
-    } else if ("${BRANCH}" == "master" && "${deplay}" == "ali-US-prod"){
+    } else if ("${BRANCH}" == "master"){
         // 生产环境发版节点
         map.put('node','master')
         // 部署环境
         map.put('DEPENV','online')
         map.put('cluster', "ACK")
     //生存环境，阿里云北京发版
-    }else if ("${BRANCH}" == "master" && "${deplay}" == "ali-Beijing-prod"){
+    }else if ("${BRANCH}" == "master"){
         // 生产环境发版节点
         map.put('node','master')
         // 部署环境
